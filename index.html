@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abel Mengstu | Technology, Business & Digital Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07131f;
+      --bg-mid: #0c2030;
+      --bg-soft: #12293c;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-strong: rgba(255, 255, 255, 0.08);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #f4f8fb;
+      --muted: #b7c7d6;
+      --sky: #7dd3fc;
+      --emerald: #86efac;
+      --cyan: #a5f3fc;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.22);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.18), transparent 22%),
+        linear-gradient(180deg, #06111c 0%, #0b1c2d 45%, #07131f 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-wrap {
+      padding-top: 24px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 22px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      font-size: 13px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #d9f3ff;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      color: #d7e3ed;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #7dd3fc 0%, #86efac 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s ease;
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      padding: 52px 0 90px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border: 1px solid rgba(134, 239, 172, 0.2);
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #e5fff0;
+      font-size: 14px;
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.12);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 18px rgba(134, 239, 172, 0.7);
+    }
+
+    h1 {
+      margin: 22px 0 0;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      max-width: 760px;
+    }
+
+    .gradient-text {
+      display: block;
+      background: linear-gradient(90deg, #8ad8ff 0%, #d5fbff 45%, #97f1b7 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p.lead {
+      margin: 26px 0 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #7dd3fc 0%, #86efac 100%);
+      color: #062033;
+      box-shadow: 0 18px 35px rgba(125, 211, 252, 0.22);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      backdrop-filter: blur(12px);
+    }
+
+    .chip-grid {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 760px;
+    }
+
+    .chip {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      color: #dde8f0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .glow {
+      position: absolute;
+      inset: -20px;
+      background: linear-gradient(135deg, rgba(125, 211, 252, 0.22), rgba(134, 239, 172, 0.18));
+      filter: blur(40px);
+      border-radius: 40px;
+    }
+
+    .visual-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(18px);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .image-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+      min-height: 540px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0c1824;
+    }
+
+    .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6, 17, 28, 0.95), rgba(6, 17, 28, 0.18) 45%, transparent 80%);
+    }
+
+    .floating-card,
+    .bottom-card {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(3, 10, 18, 0.45);
+      backdrop-filter: blur(12px);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .floating-card {
+      top: 20px;
+      left: 20px;
+      max-width: 250px;
+      padding: 18px;
+    }
+
+    .floating-card p,
+    .bottom-card p {
+      margin: 8px 0 0;
+      color: #e4edf4;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: #c8f2ff;
+      font-weight: 700;
+    }
+
+    .pill {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(3, 10, 18, 0.45);
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #f5fbff;
+      backdrop-filter: blur(12px);
+    }
+
+    .bottom-cards {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .bottom-card {
+      position: relative;
+      padding: 18px;
+    }
+
+    section {
+      padding: 0 0 26px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      padding: 34px;
+      box-shadow: var(--shadow);
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(125, 211, 252, 0.24);
+      background: rgba(255, 255, 255, 0.065);
+    }
+
+    .card h2 {
+      margin: 14px 0 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.95;
+      font-size: 16px;
+    }
+
+    .style-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .style-item {
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(8, 18, 28, 0.42);
+      color: #dce8f0;
+    }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .about-pill {
+      padding: 16px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-pill strong {
+      display: block;
+      font-size: 15px;
+      color: #f4fbff;
+      margin-bottom: 6px;
+    }
+
+    .about-pill span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .section-head h2 {
+      margin: 10px 0 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.16;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 520px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .focus-card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 28px;
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .focus-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .icon {
+      font-size: 34px;
+    }
+
+    .focus-card h3 {
+      margin: 18px 0 0;
+      font-size: 22px;
+    }
+
+    .focus-card p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .vision-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(16, 185, 129, 0.1), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+    }
+
+    .vision-card::before,
+    .vision-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    .vision-card::before {
+      width: 220px;
+      height: 220px;
+      background: rgba(125, 211, 252, 0.14);
+      top: -40px;
+      right: -40px;
+    }
+
+    .vision-card::after {
+      width: 180px;
+      height: 180px;
+      background: rgba(134, 239, 172, 0.12);
+      left: 20px;
+      bottom: -30px;
+    }
+
+    .vision-card h2,
+    .vision-card p,
+    .vision-card .label {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 24px;
+    }
+
+    .contact-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .contact-tag {
+      padding: 14px 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(8, 18, 28, 0.42);
+      color: #dce8f0;
+    }
+
+    .footer {
+      padding: 8px 0 48px;
+      text-align: center;
+      color: #aabccc;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .section-grid,
+      .contact-grid,
+      .focus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(var(--max), calc(100% - 28px));
+      }
+
+      .nav {
+        border-radius: 28px;
+        padding: 16px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .chip-grid,
+      .bottom-cards,
+      .about-highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .image-wrap {
+        min-height: 480px;
+      }
+
+      .floating-card,
+      .pill {
+        position: absolute;
+      }
+
+      .card,
+      .vision-card,
+      .focus-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container nav-wrap">
+    <header class="nav">
+      <div class="brand">Abel Mengstu</div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#focus">Focus Areas</a>
+        <a href="#vision">Vision</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">
+            <span class="dot"></span>
+            Building practical technology with purpose
+          </div>
+
+          <h1>
+            Abel Mengstu
+            <span class="gradient-text">Building practical digital solutions with purpose.</span>
+          </h1>
+
+          <p class="lead">
+            I build practical digital solutions that help people and businesses solve real problems. My work focuses on useful systems, reliable service, and long term growth.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#focus">Explore My Focus</a>
+            <a class="btn btn-secondary" href="#contact">Contact Me</a>
+          </div>
+
+          <div class="chip-grid">
+            <div class="chip">IT support and technical problem solving</div>
+            <div class="chip">Digital systems for service-based businesses</div>
+            <div class="chip">Technology strategy and digital presence</div>
+            <div class="chip">Community-centered innovation across the U.S. and Ethiopia</div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="glow"></div>
+          <div class="visual-card">
+            <div class="image-wrap">
+              <img src="https://images.unsplash.com/photo-1502175353174-a7a70e73b362?auto=format&fit=crop&w=1400&q=80" alt="Washington mountain and evergreen landscape">
+              <div class="image-overlay"></div>
+
+              <div class="floating-card">
+                <div class="label">Washington Inspired</div>
+                <p>Evergreen energy, mountain calm, water tones, and a clean modern feel.</p>
+              </div>
+
+              <div class="pill">Seattle • Innovation • Vision</div>
+
+              <div class="bottom-cards">
+                <div class="bottom-card">
+                  <div class="label">Approach</div>
+                  <p>Professional, thoughtful, and designed for long-term growth.</p>
+                </div>
+                <div class="bottom-card">
+                  <div class="label">Focus</div>
+                  <p>Broad public positioning with protected private project depth.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container section-grid">
+        <div class="card">
+          <div class="label">About</div>
+          <h2>Technology builder with a practical mindset and long-term vision.</h2>
+          <p>
+            I focus on building useful digital solutions for people, professionals, and organizations. I enjoy solving technical problems and creating systems that make daily work easier, more efficient, and more dependable. I also provide IT support and practical technical help for businesses and individuals who need real solutions they can trust.
+          </p>
+          <p>
+            I care about work that is practical, reliable, and easy to use. Whether the goal is improving a digital presence, supporting daily operations, providing IT support, or offering auto locksmith solutions, I aim to deliver service with clarity, professionalism, and care.
+          </p>
+
+          <div class="about-highlights">
+            <div class="about-pill">
+              <strong>Problem Solving</strong>
+              <span>Turning real needs into clear solutions and dependable systems.</span>
+            </div>
+            <div class="about-pill">
+              <strong>Business Focus</strong>
+              <span>Building services that support growth, efficiency, and better customer care.</span>
+            </div>
+            <div class="about-pill">
+              <strong>Purpose</strong>
+              <span>Creating work that stays useful, honest, and valuable over time.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: linear-gradient(135deg, rgba(125, 211, 252, 0.09), rgba(255, 255, 255, 0.04), rgba(134, 239, 172, 0.1));">
+          <div class="label" style="color:#d7ffe8;">What this site reflects</div>
+          <div class="style-list">
+            <div class="style-item">A clean and professional identity that feels confident and welcoming</div>
+            <div class="style-item">Strong interest in technology, IT support, digital services, and business growth</div>
+            <div class="style-item">A practical approach shaped by everyday needs and real customer problems</div>
+            <div class="style-item">A long term mindset grounded in service, trust, and impact</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="focus">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="label">Focus Areas</div>
+            <h2>Services and strengths presented in a clear and professional way.</h2>
+          </div>
+          <p>
+            These areas highlight the kind of work and services you offer in a way that feels clear, professional, and easy to understand.
+          </p>
+        </div>
+
+        <div class="focus-grid">
+          <div class="focus-card">
+            <div class="icon">💻</div>
+            <h3>Technology Solutions</h3>
+            <p>Websites, digital systems, and technical solutions built to support real people, businesses, and everyday needs.</p>
+          </div>
+          <div class="focus-card">
+            <div class="icon">📈</div>
+            <h3>IT Support</h3>
+            <p>IT support, business technology help, and practical services that help businesses run better and grow with confidence.</p>
+          </div>
+          <div class="focus-card">
+            <div class="icon">🌍</div>
+            <h3>Auto Locksmith Solutions</h3>
+            <p>Auto locksmith solutions and community minded services designed to help people quickly, professionally, and with care.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision">
+      <div class="container">
+        <div class="vision-card">
+          <div class="label">Vision</div>
+          <h2>Building a future rooted in technology, service, and meaningful impact.</h2>
+          <p>
+            This site gives a clear picture of who Abel Mengstu is and the kind of work he cares about. It brings together technology, service, IT support, and auto locksmith solutions in a way that feels professional, personal, and ready for real opportunities.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-grid">
+        <div class="card">
+          <div class="label" style="color:#d7ffe8;">Contact</div>
+          <h2>Let’s connect.</h2>
+          <p>
+            Whether you need a website, IT support, auto locksmith help, business technology solutions, or want to discuss a future opportunity, this site gives you a professional way to connect and start the conversation.
+          </p>
+          <div class="contact-tags">
+            <div class="contact-tag">Email: boletechnologiesllc@gmail.com</div>
+            <div class="contact-tag">Location: Washington, USA</div>
+            <div class="contact-tag">Focus: Technology, IT support, auto locksmith solutions</div>
+          </div>
+        </div>
+
+        <div class="card" style="background: rgba(8, 18, 28, 0.55);">
+          <div class="label">Closing Statement</div>
+          <h2>Building useful solutions, strong service, and steady growth.</h2>
+          <p>
+            Built to feel personal, professional, and welcoming with the calm confidence of the Pacific Northwest.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="container footer">
+    <div style="font-weight:700; color:#e7f2fa; margin-bottom:8px;">Bole Technologies LLC</div>
+    <div style="margin-bottom:8px;">Turning practical ideas into real world solutions.</div>
+    <div>© 2026 Bole Technologies LLC. All rights reserved.</div>
+  </div>
+</body>
+</html>
