@@ -1,0 +1,4 @@
+Contact: mailto:your-boletechnologiesllc@gmail.com
+Preferred-Languages: en
+Canonical: https://abelmengstu.com/.well-known/security.txt
+Policy: https://abelmengstu.com/security-policy
